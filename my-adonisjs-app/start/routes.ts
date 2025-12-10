@@ -26,7 +26,4 @@ router
 
 router.get('/accueil', [AuthController, 'indexAcc']).as('Auth.acc').use(middleware.auth())
 
-router
-  .post('/creation', [AuthController, 'handlCreationUser'])
-  .use(middleware.guest())
-  .as('Auth.creation')
+router.post('/creation', [AuthController, 'handlCreationUser']).use(middleware.guest())
