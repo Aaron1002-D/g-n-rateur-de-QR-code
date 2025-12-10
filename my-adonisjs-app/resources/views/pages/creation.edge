@@ -4,11 +4,11 @@
       class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-tr from-pink-200 via-purple-200 to-blue-200"
     >
       <div class=" max-w-xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-12">
-        <form action="">
-          @!component('components/input', { name : 'UserName' , label : "UserName" , type : "text" , placeholder : "Entrez votre nom d'utilisateur"  })
+        <form action="Auth.creation" method="POST">
+          @!component('components/input', { name : 'fullName' , label : "fullName" , type : "text" , placeholder : "Entrez votre nom d'utilisateur"  })
           @!component('components/input', { name : 'email' , label : "email" , type : "email" , placeholder : "Entrez votre adresse mail"  })
           @!component('components/input', { name : 'password' , label : "Mot de passe" , type : "password" , placeholder : "******"  })
-          @!component('components/input', { name : 'confirmPassword' , label : " Confirmer mot de passe" , type : "password" , placeholder : "******"  })
+          @!component('components/button', { name : 'Creer un compte' , type : 'submit' , variant : 'primary'  })
         </form>
       </div>
     </section>

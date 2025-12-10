@@ -13,7 +13,7 @@ import { middleware } from './kernel.js'
 
 router.on('/').render('pages/home')
 
-// ROUTE DE CONNECTION ET CREATION USERS
+// ROUTE DE CONNECTION ET CREATION USERS ET ACCCUEIL
 router
   .get('/connect', [AuthController, 'indexConnexion'])
   .as('Auth.connect')
@@ -23,3 +23,10 @@ router
   .get('creation', [AuthController, 'indexCreation'])
   .as('Auth.creation')
   .use(middleware.guest())
+
+router.get('/accueil', [AuthController, 'indexAcc']).as('Auth.acc').use(middleware.auth())
+
+router
+  .post('/creation', [AuthController, 'handlCreationUser'])
+  .use(middleware.guest())
+  .as('Auth.creation')
