@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Confirmation
+    </title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #fbcfe8, #e9d5ff, #bfdbfe);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    "
+  >
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px;">
+      <tr>
+        <td
+          style="
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+          "
+        >
+
+          <h1 style="font-size: 24px; margin-bottom: 16px; color: #4b5563;">
+            Salut {{ user.fullName }} 👋
+          </h1>
+
+          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
+            Merci d’avoir créé un compte sur <strong>RAC</strong>.  
+            Cliquez sur le bouton ci-dessous pour confirmer votre adresse email.
+          </p>
+
+          <a
+            href="{{ url }}"
+            style="
+               display: inline-block;
+               padding: 12px 24px;
+               background-color: #6366f1;
+               color: white;
+               text-decoration: none;
+               border-radius: 8px;
+               font-size: 16px;
+               font-weight: bold;
+               margin-bottom: 20px;
+             "
+          >
+            Confirmer mon email
+          </a>
+
+          <p style="font-size: 14px; color: #6b7280; margin-top: 20px;">
+            Si le bouton ne fonctionne pas, copiez-collez ce lien dans votre navigateur :
+          </p>
+
+          <a href="{{ url }}" style="font-size: 14px; color: #4f46e5; word-break: break-all;">
+            {{ url }}
+          </a>
+
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

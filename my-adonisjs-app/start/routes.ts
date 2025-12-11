@@ -10,8 +10,15 @@
 import AuthController from '#controllers/auth_controller'
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import vine from '@vinejs/vine'
 
 router.on('/').render('pages/home')
+
+router
+  .get('/confirm', async ({ view }) => {
+    return view.render('pages/confirm')
+  })
+  .as('confirm')
 
 // ROUTE DE CONNECTION ET CREATION USERS ET ACCCUEIL
 router

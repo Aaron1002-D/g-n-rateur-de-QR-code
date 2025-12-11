@@ -3,7 +3,7 @@
     {{ label }}
   </label>
   <input
-    type="{{ type | text }}"
+    type="{{ type || 'text' }}"
     name="{{ name }}"
     id="{{ name }}"
     placeholder="{{ placeholder }}"

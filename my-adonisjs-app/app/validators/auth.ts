@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 
 export const createUserValidator = vine.compile(
   vine.object({
-    fullName: vine.string().trim().minLength(6).maxLength(32),
+    fullName: vine.string().trim().maxLength(32),
     email: vine
       .string()
       .trim()
