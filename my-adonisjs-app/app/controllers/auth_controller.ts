@@ -7,15 +7,15 @@ import { DateTime } from 'luxon'
 import mail from '@adonisjs/mail/services/main'
 
 export default class AuthController {
-  indexConnexion({ view }: HttpContext) {
+  indexPageConnexion({ view }: HttpContext) {
     return view.render('pages/connection')
   }
 
-  indexCreation({ view }: HttpContext) {
+  indexPageCreation({ view }: HttpContext) {
     return view.render('pages/creation')
   }
 
-  indexAcc({ view }: HttpContext) {
+  indexpageAccueil({ view }: HttpContext) {
     return view.render('pages/accueil')
   }
 
@@ -43,4 +43,29 @@ export default class AuthController {
 
     return response.redirect().toRoute('confirm')
   }
+
+  async confirmEmai({ request, response, view, auth }: HttpContext) {
+    const { email, token } = request.qs()
+
+    const tokenRecord = await Token.query().where('token', token).andWhere('email', email)
+
+    if (!tokenRecord || tokenRecord.expiresAt < DateTime.now() || tokenRecord.isUsed) {
+      return response.badRequest('Lien invalide ou expiré')
+    }
+
+    const user = await User.findBy('email', email)
+
+    if (user) {
+      user.isVerified = true
+      await user.save()
+    }
+
+    await tokenRecord.delete()
+
+    await auth.use('web').login(user)
+
+    return view.render('pages/dashboard')
+  }
+
+  async handlConnexion({ request, response, auth }: HttpContext) {}
 }
