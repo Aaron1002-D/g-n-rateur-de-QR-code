@@ -13,7 +13,7 @@ import { middleware } from './kernel.js'
 import vine from '@vinejs/vine'
 import DashboarrsController from '#controllers/dashboarrs_controller'
 
-router.on('/').render('pages/home')
+router.on('/').render('pages/home').as('landing')
 
 router
   .get('/confirm', async ({ view }) => {
@@ -21,18 +21,20 @@ router
   })
   .as('confirm')
 
-router.get('/dashboard', [DashboarrsController, 'index'])
+router
+  .get('/dashboard', [DashboarrsController, 'index'])
+  .as('dashboard.page')
+  .use(middleware.auth())
 // ROUTE DE CONNECTION ET CREATION USERS ET ACCCUEIL
-router
-  .get('/connect', [AuthController, 'indexPageConnexion'])
-  .as('Auth.connect')
-  .use(middleware.guest())
+router.get('/connect', [AuthController, 'indexPageConnexion']).as('Auth.connexion')
 
-router
-  .get('creation', [AuthController, 'indexPageCreation'])
-  .as('Auth.creation')
-  .use(middleware.guest())
+router.get('/creation', [AuthController, 'indexPageCreation']).as('Auth.creation')
 
 router.get('/accueil', [AuthController, 'indexpageAccueil']).as('Auth.acc').use(middleware.auth())
 
 router.post('/creation', [AuthController, 'handlCreationUser']).use(middleware.guest())
+router.post('/connexion', [AuthController, 'handlConnexion']).use(middleware.guest())
+router
+  .get('confirm-email', [AuthController, 'confirmEmai'])
+  .as('confirm.email')
+  .use(middleware.guest())
