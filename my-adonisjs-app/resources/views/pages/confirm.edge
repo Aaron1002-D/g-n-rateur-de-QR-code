@@ -11,6 +11,10 @@
         <p class="text-[black] -700 mb-6">
           Veuillez consulter votre boîte de réception et cliquer sur le lien pour confirmer votre adresse.<br />
         </p>
+        <form action="">
+          <input type="email" name="email" id="email" value="{{ user.email }}" />
+          @!component('components/button', { name : 'Renvoyer le mail de confirmation' , type : 'submit' , variant: 'outline' })
+        </form>
       </div>
     @endslot
   @end

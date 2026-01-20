@@ -41,7 +41,9 @@ export default class AuthController {
         .htmlView('email/confirm-email', { user, url })
     })
 
-    return response.redirect().toRoute('confirm')
+    console.log(user.email)
+
+    return response.redirect().toRoute('confirm', { user })
   }
 
   async confirmEmai({ request, response, view, auth }: HttpContext) {
@@ -83,4 +85,13 @@ export default class AuthController {
     await auth.use('web').login(user)
     return response.redirect().toRoute('dashboard.page')
   }
+
+  async handlLogout({ response, auth }: HttpContext) {
+    await auth.use('web').logout()
+    return response.redirect().toRoute('landing')
+  }
+
+  // async renvoimail({ response, request, auth }: HttpContext) {
+  //   const user = await User.query().where('isVerified', false).first()
+  // }
 }

@@ -25,16 +25,18 @@ router
   .get('/dashboard', [DashboarrsController, 'index'])
   .as('dashboard.page')
   .use(middleware.auth())
-// ROUTE DE CONNECTION ET CREATION USERS ET ACCCUEIL
+
+// ROUTES DE CONNECTION , CREATION ET DECONNEXION USERS
 router.get('/connect', [AuthController, 'indexPageConnexion']).as('Auth.connexion')
 
 router.get('/creation', [AuthController, 'indexPageCreation']).as('Auth.creation')
 
-router.get('/accueil', [AuthController, 'indexpageAccueil']).as('Auth.acc').use(middleware.auth())
+router.get('/accueil', [AuthController, 'indexpageAccueil']).as('Auth.acc')
+router.post('/creation', [AuthController, 'handlCreationUser'])
+router.get('/connexion', [AuthController, 'handlConnexion'])
+router.get('confirm-email', [AuthController, 'confirmEmai']).as('confirm.email')
 
-router.post('/creation', [AuthController, 'handlCreationUser']).use(middleware.guest())
-router.post('/connexion', [AuthController, 'handlConnexion']).use(middleware.guest())
-router
-  .get('confirm-email', [AuthController, 'confirmEmai'])
-  .as('confirm.email')
-  .use(middleware.guest())
+router.get('/deconnecter', [AuthController, 'handlLogout'])
+
+// ROUTE DE RENVOI DE MAIL SI LE TOKEN N'EST PLUS VALIDE
+// router.post('/renvoie', [AuthController, 'renvoimail'])
